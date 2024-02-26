@@ -7,7 +7,7 @@ fn to_help() -> String {
 }
 
 fn help() {
-    println!("help:\n  flp -h: put help\n  flp: put working dir.\n  flp [file or dir path]: put full path of file or dir");
+    println!("help:\n  flp -h    put help\n  flp    put working dir\n  flp [file or dir path]    put full path of file or dir");
 }
 
 fn or_help(path: &str) {
@@ -20,8 +20,13 @@ fn or_help(path: &str) {
 fn get_fpath(path: &str) -> String {
     or_help(path);
     let path = PathBuf::from(path);
-    let fpath = path.canonicalize().expect("");
-    fpath.to_string_lossy().to_string()
+    match path.canonicalize() {
+        Ok(fpath) => fpath.to_string_lossy().to_string(),
+        Err(_) => {
+            println!("Not found that file or dir\n{}", to_help());
+            process::exit(0);
+        }
+    }
 }
 
 fn main() {
