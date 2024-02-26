@@ -2,16 +2,28 @@ use std::env;
 use std::path::PathBuf;
 use std::process;
 
+const RED: &str = "\x1b[31m";
+const GREEN: &str = "\x1b[32m";
+const CYAN: &str = "\x1b[36m";
+const RESET: &str = "\x1b[0m";
+
+const NAME: &str = "\x1b[0mGet Full Path Command\n\n";
+
 fn to_help() -> String {
-    format!("help:\n  flp -h")
+    format!(
+        "{}{}help:\n  {}flp -h    {}put help",
+        NAME, GREEN, CYAN, RESET
+    )
 }
 
 fn help() {
-    println!("help:\n  flp -h    put help\n  flp    put working dir\n  flp [file or dir path]    put full path of file or dir");
+    println!("{}{}Usage:\n  {}flp -h        {}put help\n  {}flp           {}put working dir\n  {}flp <PATH>    {}put full path of file or dir",
+        NAME, GREEN, CYAN, RESET, CYAN, RESET, CYAN, RESET
+    );
 }
 
 fn or_help(path: &str) {
-    if path == "-h" {
+    if path == "-h" || path == "--help" {
         help();
         process::exit(0);
     }
@@ -23,7 +35,7 @@ fn get_fpath(path: &str) -> String {
     match path.canonicalize() {
         Ok(fpath) => fpath.to_string_lossy().to_string(),
         Err(_) => {
-            println!("Not found that file or dir\n{}", to_help());
+            println!("{}Not found that file or dir\n\n{}", RED, to_help());
             process::exit(0);
         }
     }
