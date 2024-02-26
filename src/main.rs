@@ -1,11 +1,32 @@
 use std::env;
-//use std::path::Path;
+use std::path::PathBuf;
+use std::process;
+
+fn to_help() -> String {
+    format!("help:\n  flp -h")
+}
+
+fn help() {
+    println!("help:\n  flp -h: put help\n  flp: put working dir.\n  flp [file or dir path]: put full path of file or dir");
+}
+
+fn or_help(path: &str) {
+    if path == "-h" {
+        help();
+        process::exit(0);
+    }
+}
+
+fn get_fpath(path: &str) -> String {
+    or_help(path);
+    let path = PathBuf::from(path);
+    let fpath = path.canonicalize().expect("");
+    fpath.to_string_lossy().to_string()
+}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let len = args.len();
-
-    println!("{}", len);
 
     let path: Option<&str> = match len {
         1 => Some("."),
@@ -13,5 +34,10 @@ fn main() {
         _ => None,
     };
 
-    println!("{:?}", path);
+    let fpath: String = match path {
+        Some(path) => get_fpath(path),
+        None => to_help(),
+    };
+
+    println!("{}", fpath);
 }
