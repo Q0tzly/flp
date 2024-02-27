@@ -20,7 +20,7 @@ Get fullpath of file or working directory
 
 ## install to /usr/local/bin
 ```
-  git clone https://github.com/Q0tzly/flp.git"
+  git clone https://github.com/Q0tzly/flp.git
   cd flp
   cargo build --release
   cp target/release/flp /usr/local/bin
