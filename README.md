@@ -2,13 +2,34 @@
 Get fullpath of file or working directory
 
 ## How to Install
-### cargo build
+## install to ~/.cargo/bin
+``` 
+  git clone https://github.com/Q0tzly/flp.git
+  cd flp
+  cargo install --path .
 ```
-git clone https://github.com/Q0tzly/flp.git"
-cd flp
-cargo build --release
-cp target/release/flp /usr/local/bin
-cd .. && rm -rf flp
+## uninstall
+```
+  cd flp
+  cargo uninstall
+
+  or
+
+  rm  ~/.cargo/bin/flp
+```
+
+## install to /usr/local/bin
+```
+  git clone https://github.com/Q0tzly/flp.git"
+  cd flp
+  cargo build --release
+  cp target/release/flp /usr/local/bin
+  cd .. && rm -rf flp
+```
+
+## uninstall
+```
+  rm /usr/local/bin/flp
 ```
 
 ## Usage
@@ -20,4 +41,6 @@ cd .. && rm -rf flp
 ```
 
 ## Copyright
-Copyright(c)2024: Q0tzly
+Copyright (c) 2024: [Q0tzly](https://github.com/Q0tzly)
+
+See the [LICENSE](https://github.com/Q0tzly/flp/blob/main/LICENSE.txt)
