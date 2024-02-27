@@ -2,6 +2,15 @@
 Get fullpath of file or working directory
 
 ## How to Install
+## install with cargo install
+```
+  cargo install flp 
+```
+## uninstall
+```
+  cargo uninstall flp
+```
+
 ## install to ~/.cargo/bin
 ``` 
   git clone https://github.com/Q0tzly/flp.git
