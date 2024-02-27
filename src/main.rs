@@ -8,15 +8,23 @@ const MANY_ARGS: &str = "\x1b[31m\x1b[1mHelp: \x1b[0m\x1b[0mToo many arguments p
 const TO_HELP: &str =
     "\n\x1b[1m\x1b[32mUsage:\x1b[0m\n  \x1b[36mflp -h, --help     \x1b[0mput help\x1b[0m";
 
-const VERSION: &str = "flp    0.1.0 (2024-02-27)";
+const VERSION: &str = "flp    ";
 
 const HELP: &str =
     "\x1b[0mGet Full Path Command\n\n\x1b[1m\x1b[32mUsage:\x1b[0m\n  \x1b[36mflp -h, --help     \x1b[0mput help\n  \x1b[36mflp -v, --version  \x1b[0mput version\n  \x1b[36mflp                \x1b[0mput working dir\n  \x1b[36mflp <PATH>         \x1b[0mput full path of file or dir";
 
+fn get_version() -> String {
+    if let Some(version) = option_env!("CARGO_PKG_VERSION") {
+        format!("{}{}", VERSION, version)
+    } else {
+        "Unknown version".to_string()
+    }
+}
+
 fn or_options(path: &str) {
-    let res: Option<&str> = match path {
-        "-h" | "--help" => Some(HELP),
-        "-v" | "--version" => Some(VERSION),
+    let res: Option<String> = match path {
+        "-h" | "--help" => Some(HELP.to_string()),
+        "-v" | "--version" => Some(get_version()),
         _ => None,
     };
 
