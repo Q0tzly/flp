@@ -1,55 +1,34 @@
 # flp
-Get fullpath of file or working directory
 
-## How to Install
-## install with cargo install
-```
-  cargo install flp
-```
-## uninstall
-```
-  cargo uninstall flp
-```
+Get the full path of a file or the current working directory.
 
-## install to ~/.cargo/bin
-```
-  git clone https://github.com/Q0tzly/flp.git
-  cd flp
-  cargo install --path .
-```
-## uninstall
-```
-  cd flp
-  cargo uninstall
+## Installation
 
-  or
+### From crates.io
 
-  rm  ~/.cargo/bin/flp
+```sh
+cargo install flp
 ```
 
-## install to /usr/local/bin
-```
-  git clone https://github.com/Q0tzly/flp.git
-  cd flp
-  cargo build --release
-  cp target/release/flp /usr/local/bin
-  cd .. && rm -rf flp
-```
+### From source
 
-## uninstall
-```
-  rm /usr/local/bin/flp
+```sh
+git clone https://github.com/Q0tzly/flp.git
+cd flp
+cargo install --path .
 ```
 
 ## Usage
+
 ```
-  flp -h, --help     put help
-  flp -v, --version  put version
-  flp                put working dir
-  flp <PATH>         put full path of file or dir
+flp -h, --help     Show help
+flp -v, --version  Show version
+flp                Show current working directory
+flp <PATH>         Show full path of file or directory
 ```
 
 ## Copyright
-Copyright (c) 2024: [Q0tzly](https://github.com/Q0tzly)
+
+Copyright (c) 2024-2026 [Q0tzly](https://github.com/Q0tzly)
 
 See the [LICENSE](https://github.com/Q0tzly/flp/blob/main/LICENSE.txt)
