@@ -1,7 +1,6 @@
 [package]
 name = "flp"
 version = "0.1.1"
-authors = ["Q0tzly"]
 edition = "2021"
 
 description = "Get fullpath of file or working directory"
