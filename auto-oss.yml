@@ -1,0 +1,21 @@
+version: 0
+
+accepts:
+  scopes: [bug-fix, docs, typo, test, refactor, feature]
+  max_diff_lines: 300
+
+gates:
+  check: "cargo check"
+  format: "cargo fmt -- --check"
+  lint: "cargo clippy --all-targets --all-features -- -D warnings"
+  test: "cargo test"
+
+require:
+  human_review: true
+  reproduction: true
+
+fallback: issue
+
+metadata:
+  label: "auto-oss"
+  language: "en"

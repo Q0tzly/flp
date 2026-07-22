@@ -19,3 +19,16 @@ jobs:
       - run: cargo clippy --all-targets --all-features -- -D warnings
       - run: cargo fmt -- --check
       - run: cargo test
+
+  # Validate the metadata on auto-oss submissions. Ordinary pull requests
+  # have no metadata block and pass this check unchanged.
+  verify-auto-oss-submission:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo install auto-oss --version 0.1.6 --locked
+      - run: autos verify "${{ github.event.pull_request.html_url }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

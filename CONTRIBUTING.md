@@ -19,6 +19,14 @@ cargo fmt
 
 All checks must pass before opening a pull request.
 
+## auto-oss submissions
+
+This repository accepts [auto-oss](https://github.com/Q0tzly/auto-oss)
+submissions. The acceptance policy is in
+[`auto-oss.yml`](auto-oss.yml). The `autos` client runs the declared checks,
+requests your review, and includes the required submission metadata before it
+opens a pull request.
+
 ## Pull Request
 
 - Keep changes focused and minimal
