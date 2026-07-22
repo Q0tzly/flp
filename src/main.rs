@@ -19,18 +19,17 @@ impl fmt::Display for AppError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = env!("CARGO_PKG_NAME");
         match self {
-            AppError::TooManyArgs => write!(
+            Self::TooManyArgs => write!(
                 f,
                 "\x1b[31m\x1b[1mError: \x1b[0mToo many arguments provided.\n\n\
                  \x1b[1m\x1b[32mUsage:\x1b[0m\n  \x1b[36m{} -h, --help     \x1b[0mput help",
                 name
             ),
-            AppError::NotFound { path } => write!(
+            Self::NotFound { path } => write!(
                 f,
                 "\x1b[31m\x1b[1mError: \x1b[0mNo such file or directory: {}\n\n\
                  \x1b[1m\x1b[32mUsage:\x1b[0m\n  \x1b[36m{} -h, --help     \x1b[0mput help",
-                path,
-                name
+                path, name
             ),
         }
     }
@@ -52,7 +51,7 @@ fn help_text() -> String {
 fn resolve_path(input: &str) -> Result<String, AppError> {
     Path::new(input)
         .canonicalize()
-        .map(|p| p.to_string_lossy().to_string())
+        .map(|p| p.to_string_lossy().into_owned())
         .map_err(|_| AppError::NotFound {
             path: input.to_string(),
         })
@@ -79,7 +78,7 @@ fn main() {
         Ok(Command::Output(s)) => println!("{}", s),
         Ok(Command::Help) => println!("{}", help_text()),
         Ok(Command::Version) => {
-            println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"))
+            println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
         }
         Err(e) => {
             eprintln!("{}", e);
@@ -109,10 +108,7 @@ mod tests {
 
     #[test]
     fn run_default() {
-        assert!(matches!(
-            run(&["flp".to_string()]),
-            Ok(Command::Output(_))
-        ));
+        assert!(matches!(run(&["flp".to_string()]), Ok(Command::Output(_))));
     }
 
     #[test]
