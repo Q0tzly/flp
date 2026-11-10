@@ -4,6 +4,14 @@ Get the full path of a file or the current working directory.
 
 ## Installation
 
+### With mise
+
+```sh
+mise use -g github:Q0tzly/flp
+```
+
+Prebuilt binaries (Linux, macOS, Windows) are attached to each [release](https://github.com/Q0tzly/flp/releases).
+
 ### From crates.io
 
 ```sh
